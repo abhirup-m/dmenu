@@ -11,7 +11,8 @@ conflicts=('dmenu' 'dmenu-git')
 build() 
 {
 	cd "$srcdir/$gitname"
-	make
+	cat ~/.config/dmenu/config.h > config.h
+        make
 }
 
 package() 
