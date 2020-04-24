@@ -1,4 +1,4 @@
-pkgname=dmenu
+pkgname=dmenu-kirito
 gitname=dmenu
 pkgver=4.9
 pkgrel=1
