@@ -727,7 +727,7 @@ main(int argc, char *argv[])
 			dmx = atoi(argv[++i]);
 		else if (!strcmp(argv[i], "-y"))   /* window y offset (from bottom up if -b) */
 			dmy = atoi(argv[++i]);
-		else if (!strcmp(argv[i], "-w"))   /* make dmenu this wide */
+		else if (!strcmp(argv[i], "-wi"))   /* make dmenu this wide */
 			dmw = atoi(argv[++i]);
 		else if (!strcmp(argv[i], "-m"))
 			mon = atoi(argv[++i]);
