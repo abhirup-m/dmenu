@@ -20,8 +20,6 @@
 #include "util.h"
 
 /* macros */
-#define OPAQUE 0xffffffff
-#define OPACITY "_NET_WM_WINDOW_OPACITY"
 #define INTERSECT(x,y,w,h,r)  (MAX(0, MIN((x)+(w),(r).x_org+(r).width)  - MAX((x),(r).x_org)) \
                              * MAX(0, MIN((y)+(h),(r).y_org+(r).height) - MAX((y),(r).y_org)))
 #define LENGTH(X)             (sizeof X / sizeof X[0])
@@ -669,8 +667,6 @@ setup(void)
 	                    CopyFromParent, CopyFromParent, CopyFromParent,
 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
 	XSetClassHint(dpy, win, &ch);
-        opacity = MIN(MAX(opacity, 0), 1);
-        unsigned int opacity_set = (unsigned int)(opacity * OPAQUE);
         XChangeProperty(dpy, win, XInternAtom(dpy, OPACITY, False), XA_CARDINAL, 32, PropModeReplace,(unsigned char *) &opacity_set, 1L);
 
 	/* input methods */
