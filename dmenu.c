@@ -20,6 +20,8 @@
 #include "util.h"
 
 /* macros */
+#define OPAQUE 0xffffffff
+#define OPACITY "_NET_WM_WINDOW_OPACITY"
 #define INTERSECT(x,y,w,h,r)  (MAX(0, MIN((x)+(w),(r).x_org+(r).width)  - MAX((x),(r).x_org)) \
                              * MAX(0, MIN((y)+(h),(r).y_org+(r).height) - MAX((y),(r).y_org)))
 #define LENGTH(X)             (sizeof X / sizeof X[0])
@@ -668,8 +670,6 @@ setup(void)
 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
 	XSetClassHint(dpy, win, &ch);
         opacity = MIN(MAX(opacity, 0), 1);
-        #define OPAQUE 0xffffffff
-        #define OPACITY "_NET_WM_WINDOW_OPACITY"
         unsigned int opacity_set = (unsigned int)(opacity * OPAQUE);
         XChangeProperty(dpy, win, XInternAtom(dpy, OPACITY, False), XA_CARDINAL, 32, PropModeReplace,(unsigned char *) &opacity_set, 1L);
 
@@ -708,7 +708,6 @@ main(int argc, char *argv[])
 {
 	XWindowAttributes wa;
 	int i, fast = 0;
-        float opacity = 1;
         fstrncmp = strncasecmp;
         fstrstr = cistrstr;
 	for (i = 1; i < argc; i++)
@@ -727,8 +726,6 @@ main(int argc, char *argv[])
 			usage();
 		/* these options take one argument */
 
-		else if (!strcmp(argv[i], "-o"))   /* number of lines in vertical list */
-			opacity = atoi(argv[++i]);
 		else if (!strcmp(argv[i], "-l"))   /* number of lines in vertical list */
 			lines = atoi(argv[++i]);
 		else if (!strcmp(argv[i], "-x"))   /* window x offset */
